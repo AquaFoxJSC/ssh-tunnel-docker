@@ -1,0 +1,13 @@
+services:
+  ssh-tunnel:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ssh-tunnel
+    environment:
+      SSH_HOST: 192.168.1.100
+      SSH_USER: admin
+      SSH_LOCAL_FORWARD: "6379:localhost:6379"
+    volumes:
+      - ~/.ssh/id_rsa:/ssh-keys/id_rsa:ro
+    restart: unless-stopped
